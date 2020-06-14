@@ -32,3 +32,4 @@ yarn-debug.log*
 
 # RubyMineの生成ファイル群
 .idea/*
+.DS_Store

@@ -2,8 +2,13 @@ class ApplicationController < ActionController::Base
   # レイアウトをset
   layout :set_layout
 
+  class Forbidden < ActionController::ActionControllerError; end
+  class IpAddressRejected < ActionController::ActionControllerError; end
+
   # コントローラの中で発生したStandardErrorを例外処理するメソッドを指定
   rescue_from StandardError, with: :rescue500
+  rescue_from Forbidden, with: :rescue403
+  rescue_from IpAddressRejected, with: :rescue403
 
   private def set_layout
     # controllerの名前から、staff/admin/customerのどれにマッチするか
@@ -14,6 +19,11 @@ class ApplicationController < ActionController::Base
       # customerを返す
       "customer"
     end
+  end
+
+  private def rescue403(e)
+    @exception = e
+    render "errors/forbidden", status: 403
   end
 
   private def rescue500(e)

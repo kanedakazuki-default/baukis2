@@ -8,7 +8,6 @@ class Staff::Authenticator
   # 場合にtrueを返す
   def authenticate(raw_password)
     @staff_member &&
-        !@staff_member.suspended? &&
         @staff_member.hashed_password &&
         @staff_member.start_date <= Date.today &&
         (@staff_member.end_date.nil? || @staff_member.end_date > Date.today) &&

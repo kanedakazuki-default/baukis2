@@ -27,6 +27,7 @@ class Staff::SessionsController < Staff::Base
         flash.notice = "ログインしました。"
         redirect_to :staff_root
       end
+    end
   end
 
   private def login_form_params

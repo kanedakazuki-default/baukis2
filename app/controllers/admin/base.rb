@@ -1,5 +1,5 @@
 class Admin::Base < ApplicationController
-  # before_action :authorize
+  before_action :authorize
   # before_action :check_account
   # before_action :check_timeout
 
@@ -12,13 +12,13 @@ class Admin::Base < ApplicationController
 
   helper_method :current_administrator
 
-  # private def authorize
-  #   unless current_administrator
-  #     flash.alert = "管理者としてログインしてください。"
-  #     redirect_to :admin_login
-  #   end
-  # end
-  #
+  private def authorize
+    unless current_administrator
+      flash.alert = "管理者としてログインしてください。"
+      redirect_to :admin_login
+    end
+  end
+
   # private def check_account
   #   if current_administrator && current_administrator.suspended?
   #     session.delete(:administrator_id)
